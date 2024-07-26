@@ -1,14 +1,15 @@
 import 'dart:math';
 
-List<String> getRandomMovies(List<String> list, int count) {
-  final random = Random();
+List<String> getRandomMovies() {
+  final Random random = Random();
+  final Set<int> numbers = {};
 
-  final List<int> indices = List.generate(list.length, (index) => index);
-  indices.shuffle(random);
+  // Generate unique random numbers
+  while (numbers.length < 6) {
+    numbers.add(random.nextInt(20) + 1);
+  }
+  // Create the list of filenames based on the unique numbers
+  final List<String> movieFilenames = numbers.map((number) => 'assets/images/movies_list/movie_$number.jpg').toList();
 
-  // Take the first `count` indices from the shuffled list
-  final selectedIndices = indices.take(count);
-
-  // Use the selected indices to get the corresponding movies
-  return selectedIndices.map((index) => list[index]).toList();
+  return movieFilenames;
 }

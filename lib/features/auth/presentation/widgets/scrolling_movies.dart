@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:cinemate/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:cinemate/core/constants/app_assets.dart';
 import 'package:cinemate/core/utils/get_random_movies.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -25,38 +24,22 @@ class ScrollingMoviesState extends State<ScrollingMovies>
   late final ScrollController _scrollController2;
   late final ScrollController _scrollController3;
   late final ScrollController _scrollController4;
-  late final List<String> movies;
   late final Ticker _ticker;
+  late final List<List<String>> randomMovies;
 
   @override
   void initState() {
     super.initState();
-    movies = [
-      AppAssets.movie1,
-      AppAssets.movie2,
-      AppAssets.movie3,
-      AppAssets.movie4,
-      AppAssets.movie5,
-      AppAssets.movie6,
-      AppAssets.movie7,
-      AppAssets.movie8,
-      AppAssets.movie9,
-      AppAssets.movie10,
-      AppAssets.movie11,
-      AppAssets.movie12,
-      AppAssets.movie13,
-      AppAssets.movie14,
-      AppAssets.movie15,
-      AppAssets.movie16,
-      AppAssets.movie17,
-      AppAssets.movie18,
-      AppAssets.movie19,
-      AppAssets.movie20,
-    ];
     _scrollController1 = ScrollController();
     _scrollController2 = ScrollController();
     _scrollController3 = ScrollController();
     _scrollController4 = ScrollController();
+    randomMovies = [
+      getRandomMovies(),
+      getRandomMovies(),
+      getRandomMovies(),
+      getRandomMovies()
+    ];
     _ticker = createTicker((_) => _autoScroll());
     _ticker.start();
   }
@@ -99,66 +82,67 @@ class ScrollingMoviesState extends State<ScrollingMovies>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Row(
-          children: List.generate(
-            4,
-            (columnIndex) {
-              final ScrollController scrollController;
-              switch (columnIndex) {
-                case 0:
-                  scrollController = _scrollController1;
-                  break;
-                case 1:
-                  scrollController = _scrollController2;
-                  break;
-                case 2:
-                  scrollController = _scrollController3;
-                  break;
-                case 3:
-                  scrollController = _scrollController4;
-                  break;
-                default:
-                  scrollController = _scrollController1;
-              }
-              return Expanded(
-                child: CustomScrollView(
-                  controller: scrollController,
-                  reverse: columnIndex.isOdd ? false : true,
-                  slivers: [
-                    SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        (context, index) {
-                          final randomMovies = getRandomMovies(movies, 6);
-                          return ConstrainedBox(
-                            constraints: BoxConstraints(
-                              maxHeight:
-                                  MediaQuery.of(context).size.height * 0.25,
+    return Scaffold(
+      body: Stack(
+        children: [
+          CustomScrollView(
+            scrollDirection: Axis.vertical,
+            slivers: [
+              SliverToBoxAdapter(
+                child: Row(
+                  children: List.generate(4, (columnIndex) {
+                    final ScrollController scrollController;
+                    switch (columnIndex) {
+                      case 0:
+                        scrollController = _scrollController1;
+                        break;
+                      case 1:
+                        scrollController = _scrollController2;
+                        break;
+                      case 2:
+                        scrollController = _scrollController3;
+                        break;
+                      case 3:
+                        scrollController = _scrollController4;
+                        break;
+                      default:
+                        scrollController = _scrollController1;
+                    }
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width / 4,
+                      child: CustomScrollView(
+                        controller: scrollController,
+                        reverse: columnIndex.isOdd,
+                        scrollDirection: Axis.vertical,
+                        slivers: [
+                          SliverList(
+                            delegate: SliverChildBuilderDelegate(
+                              (context, index) {
+                                return Image.asset(
+                                  randomMovies[columnIndex]
+                                      [index % randomMovies.length],
+                                  fit: BoxFit.cover,
+                                );
+                              },
+                              childCount: 6 * 500,
                             ),
-                            child: Image.asset(
-                              randomMovies[index % randomMovies.length],
-                              fit: BoxFit.cover,
-                            ),
-                          );
-                        },
-                        childCount: 6 * 500,
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
+                    );
+                  }),
                 ),
-              );
-            },
+              ),
+            ],
           ),
-        ),
-        Positioned.fill(
-          child: Container(
+          Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 stops: widget.linearGradientStops,
                 colors: [
                   AppColors.darkPurple.withOpacity(0),
-                  AppColors.black.withOpacity(0.95)
+                  AppColors.black.withOpacity(0.90),
                 ],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -166,30 +150,29 @@ class ScrollingMoviesState extends State<ScrollingMovies>
             ),
             child: BackdropFilter(
               filter: ImageFilter.blur(
-                sigmaX: 9,
-                sigmaY: 9,
+                sigmaX: 4,
+                sigmaY: 4,
               ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 21),
-                child: CustomScrollView(
-                  slivers: [
-                    SliverFillRemaining(
-                      fillOverscroll: true,
+              child: CustomScrollView(
+                slivers: [
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: 21),
+                    sliver: SliverFillRemaining(
                       hasScrollBody: false,
                       child: Column(
                         children: [
-                          const Expanded(child: SizedBox(),),
+                          const Expanded(child: SizedBox()),
                           ...widget.columnChildren,
                         ],
                       ),
                     ),
-                  ],
-                ),
+                  )
+                ],
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

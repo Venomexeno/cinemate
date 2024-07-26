@@ -1,4 +1,4 @@
-package com.venomexeno.cinemate.cinemate
+package com.venomexeno.cinemate
 
 import io.flutter.embedding.android.FlutterActivity
 

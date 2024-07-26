@@ -1,10 +1,18 @@
+import 'package:cinemate/core/constants/app_colors.dart';
+import 'package:cinemate/core/constants/app_keys.dart';
+import 'package:cinemate/core/constants/app_routes.dart';
 import 'package:cinemate/core/constants/app_strings.dart';
 import 'package:cinemate/core/constants/app_styles.dart';
+import 'package:cinemate/core/services/service_locator.dart';
+import 'package:cinemate/features/auth/domain/use_cases/sign_in_use_case.dart';
+import 'package:cinemate/features/auth/presentation/manager/auth_cubit/auth_cubit.dart';
 import 'package:cinemate/features/auth/presentation/widgets/auth_elevated_button.dart';
 import 'package:cinemate/features/auth/presentation/widgets/scrolling_movies.dart';
 import 'package:cinemate/features/auth/presentation/widgets/sign_in_page_widgets/sign_in_form_section.dart';
 import 'package:cinemate/features/auth/presentation/widgets/sign_in_page_widgets/sign_up_text_row.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SignInPageBody extends StatefulWidget {
   const SignInPageBody({super.key});
@@ -36,17 +44,14 @@ class _SignInPageBodyState extends State<SignInPageBody> {
   @override
   Widget build(BuildContext context) {
     return ScrollingMovies(
-      linearGradientStops: const [
-        0,
-        0.38,
-      ],
+      linearGradientStops: const [0, 0.38],
       columnChildren: [
         const SizedBox(
           width: 80,
           child: Divider(
             height: 1,
             thickness: 2,
-          ),
+          )
         ),
         Text(
           AppStrings.cine,
@@ -69,18 +74,55 @@ class _SignInPageBodyState extends State<SignInPageBody> {
           passwordController: _passwordController,
           formKey: _formKey,
         ),
-        Column(
-          children: [
-            const SizedBox(height: 39),
-            AuthElevatedButton(
+        const SizedBox(height: 39),
+        BlocConsumer<AuthCubit, AuthState>(
+          listener: (context, state) async {
+            if (state is SignInSuccess) {
+              if (state.user.emailVerified) {
+                final token = await state.user.getIdToken();
+                await sl<FlutterSecureStorage>()
+                    .write(key: AppKeys.kToken, value: token);
+                if (context.mounted) {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, AppRoutes.rootPageRoute, (route) => false);
+                }
+              } else {
+                await state.user.sendEmailVerification();
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      backgroundColor: AppColors.red,
+                      content: Text(AppStrings.emailNotVerified),
+                    ),
+                  );
+                }
+              }
+            } else if (state is SignInFailure) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: AppColors.red,
+                  content: Text(state.errMessage),
+                ),
+              );
+            }
+          },
+          builder: (context, state) {
+            return AuthElevatedButton(
+              isLoading: state is SignInLoading,
               text: AppStrings.signIn,
-              onPressed: () {},
-            ),
-            const SizedBox(height: 51),
-            const SignUpTextRow(),
-            const SizedBox(height: 32),
-          ],
+              onPressed: () {
+                context.read<AuthCubit>().signIn(
+                      parameters: SignInParameters(
+                          email: _emailController.text,
+                          password: _passwordController.text),
+                    );
+              },
+            );
+          },
         ),
+        const SizedBox(height: 51),
+        const SignUpTextRow(),
+        const SizedBox(height: 32),
       ],
     );
   }

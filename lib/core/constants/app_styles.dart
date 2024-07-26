@@ -10,6 +10,38 @@ class AppStyles {
     color: AppColors.white
   );
 
+  static TextStyle thick12 = const TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.w900,
+    color: AppColors.yellow
+  );
+
+  static TextStyle light16 = const TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w300,
+    color: AppColors.white
+  );
+
+  static TextStyle light11 = const TextStyle(
+    fontSize: 11,
+    fontWeight: FontWeight.w300,
+    color: AppColors.white
+
+  );
+
+  static TextStyle light12 = const TextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.w300,
+      color: AppColors.white
+
+  );
+
+  static TextStyle semiBold15 = const TextStyle(
+    fontSize: 15,
+    fontWeight: FontWeight.w600,
+    color: AppColors.white
+  );
+
   static TextStyle medium20 = const TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w500,

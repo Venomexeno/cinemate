@@ -1,31 +1,41 @@
-import 'package:cinemate/core/constants/app_routes.dart';
+import 'package:cinemate/core/constants/app_colors.dart';
+import 'package:cinemate/core/constants/app_strings.dart';
+import 'package:cinemate/core/services/service_locator.dart';
+import 'package:cinemate/core/utils/determine_initial_route.dart';
 import 'package:cinemate/on_generate_route.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-void main() {
-  runApp(const MyApp());
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await ServicesLocator().init();
+  final pageRoute = await determineInitialRoute();
+  runApp(MyApp(pageRoute: pageRoute));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required this.pageRoute});
 
-  // This widget is the root of your application.
+  final String pageRoute;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: AppStrings.appName,
       theme: ThemeData(
         textTheme: GoogleFonts.interTextTheme(
           Theme.of(context).textTheme,
         ),
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.darkPurple),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: OnGenerateRoute.routes,
-      initialRoute: AppRoutes.authPageRoute,
+      initialRoute: pageRoute,
       builder: (context, child) {
         return ResponsiveBreakpoints.builder(
           breakpoints: [

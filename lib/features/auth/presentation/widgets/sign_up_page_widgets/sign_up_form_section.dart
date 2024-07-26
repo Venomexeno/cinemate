@@ -1,4 +1,5 @@
 import 'package:cinemate/core/constants/app_strings.dart';
+import 'package:cinemate/features/auth/presentation/widgets/auth_password_form_field.dart';
 import 'package:cinemate/features/auth/presentation/widgets/auth_text_form_field.dart';
 import 'package:flutter/material.dart';
 
@@ -25,9 +26,9 @@ class SignUpFormSection extends StatelessWidget {
             hintText: AppStrings.email,
           ),
           const SizedBox(height: 21),
-          AuthTextFormField(
-            controller: passwordController,
+          AuthPasswordFormField(
             hintText: AppStrings.password,
+            controller: passwordController,
           ),
         ],
       ),

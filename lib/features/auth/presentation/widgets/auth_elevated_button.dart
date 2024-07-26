@@ -7,9 +7,11 @@ class AuthElevatedButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
+    this.isLoading = false,
   });
 
   final String text;
+  final bool isLoading;
   final void Function()? onPressed;
 
   @override
@@ -24,23 +26,29 @@ class AuthElevatedButton extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: Text(
-        text,
-        style: AppStyles.medium20.copyWith(
-          shadows: [
-            const Shadow(
-              blurRadius: 3.0,
-              color:  AppColors.white,
-              offset: Offset(0, 0),
+      child: isLoading
+          ? const Center(
+              child: CircularProgressIndicator(
+                color: AppColors.white,
+              ),
+            )
+          : Text(
+              text,
+              style: AppStyles.medium20.copyWith(
+                shadows: [
+                  const Shadow(
+                    blurRadius: 3.0,
+                    color: AppColors.white,
+                    offset: Offset(0, 0),
+                  ),
+                  const Shadow(
+                    blurRadius: 8.0,
+                    color: AppColors.white,
+                    offset: Offset(0, 0),
+                  ),
+                ],
+              ),
             ),
-            const Shadow(
-              blurRadius: 8.0,
-              color:  AppColors.white,
-              offset: Offset(0, 0),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
