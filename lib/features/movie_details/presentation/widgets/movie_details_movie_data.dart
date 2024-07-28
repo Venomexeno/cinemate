@@ -7,7 +7,18 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 class MovieDetailsMovieData extends StatelessWidget {
   const MovieDetailsMovieData({
     super.key,
+    required this.posterUrl,
+    required this.title,
+    required this.company,
+    required this.rating,
+    required this.imdbRating,
   });
+
+  final String posterUrl;
+  final String title;
+  final String company;
+  final num rating;
+  final num imdbRating;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +32,7 @@ class MovieDetailsMovieData extends StatelessWidget {
             child: CachedNetworkImage(
               fit: BoxFit.fill,
               width: 140,
-              imageUrl:
-                  "https://resizing.flixster.com/OBCMbeYEWS5tI2QhErFskxKyEa0=/206x305/v2/https://resizing.flixster.com/mPJp85eApHd8ih9XF5E9d3-2LbM=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzUxODlkZDE1LTQyYjUtNDg5ZS05NjZmLWMxZDk1YWZhN2E1ZC5qcGc=",
+              imageUrl: posterUrl,
             ),
           ),
           const SizedBox(width: 17),
@@ -32,16 +42,16 @@ class MovieDetailsMovieData extends StatelessWidget {
               children: [
                 const Spacer(),
                 Text(
-                  'Deadpool & Wolverine',
+                  title,
                   style: AppStyles.semiBold20,
                 ),
                 const SizedBox(height: 3),
-                Text('Marvel Studios', style: AppStyles.light11),
+                Text(company, style: AppStyles.light11),
                 const SizedBox(height: 7),
                 Row(
                   children: [
                     RatingBarIndicator(
-                      rating: 4,
+                      rating: rating.toDouble(),
                       itemBuilder: (context, index) => const Icon(
                         Icons.star_rounded,
                         color: AppColors.goldenRod,
@@ -52,7 +62,7 @@ class MovieDetailsMovieData extends StatelessWidget {
                       direction: Axis.horizontal,
                     ),
                     const SizedBox(width: 5),
-                    Text('(4/5)', style: AppStyles.light11),
+                    Text('($rating/5)', style: AppStyles.light11),
                   ],
                 ),
                 const SizedBox(height: 11),
@@ -76,7 +86,7 @@ class MovieDetailsMovieData extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 6),
-                    Text('8.5', style: AppStyles.light12),
+                    Text('$imdbRating', style: AppStyles.light12),
                   ],
                 )
               ],

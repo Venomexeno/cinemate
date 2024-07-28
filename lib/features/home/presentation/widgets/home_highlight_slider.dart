@@ -30,14 +30,16 @@ class HomeHighlightSlider extends StatelessWidget {
         final movie = movies[index];
         return Stack(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(13),
-              child: CachedNetworkImage(
-                imageUrl:movie.imageUrl,
-                fit: BoxFit.fill,
-                width: double.infinity,
-                height: 175,
-              )
+            Positioned.fill(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(13),
+                child: CachedNetworkImage(
+                  imageUrl:movie.imageUrl,
+                  fit: BoxFit.fill,
+                  width: double.infinity,
+                  height: 175,
+                )
+              ),
             ),
             Positioned(
               bottom: 18,

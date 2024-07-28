@@ -3,16 +3,14 @@ import 'package:cinemate/features/movie_details/presentation/widgets/movie_detai
 import 'package:flutter/material.dart';
 
 class MovieDetailsPage extends StatelessWidget {
-  const MovieDetailsPage({super.key, required this.id});
-
-  final String id;
+  const MovieDetailsPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffoldWithBackground(
-      body: MovieDetailsPageBody(
-        id: id,
-      ),
+    return const CustomScaffoldWithBackground(
+      body: MovieDetailsPageBody(),
     );
   }
 }

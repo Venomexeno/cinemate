@@ -5,18 +5,21 @@ import 'package:flutter/material.dart';
 class MovieDetailsCoverImage extends StatelessWidget {
   const MovieDetailsCoverImage({
     super.key,
+    required this.coverUrl,
   });
+
+  final String coverUrl;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         CachedNetworkImage(
-            fit: BoxFit.cover,
-            height: 306,
-            width: double.infinity,
-            imageUrl:
-            "https://resizing.flixster.com/NoO1q75sRFFMjgKKwPgDJEQoBRM=/1100x618/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p23093323_i_h10_ab.jpg"),
+          fit: BoxFit.cover,
+          height: 306,
+          width: double.infinity,
+          imageUrl: coverUrl,
+        ),
         Container(
           height: 306,
           width: double.infinity,

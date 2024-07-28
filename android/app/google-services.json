@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "260806816691",
+    "project_id": "cine-mate-90d94",
+    "storage_bucket": "cine-mate-90d94.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260806816691:android:f3f159127af26b5fba91c6",
+        "android_client_info": {
+          "package_name": "com.venomexeno.cinemate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0C1-ReYufCkUi7no5KPrXnzWQ3CYpxWI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

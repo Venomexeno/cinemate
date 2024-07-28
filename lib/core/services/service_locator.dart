@@ -13,6 +13,11 @@ import 'package:cinemate/features/home/domain/use_cases/get_movies_in_theaters_u
 import 'package:cinemate/features/home/presentation/manager/get_coming_soon_movies_cubit/get_coming_soon_movies_cubit.dart';
 import 'package:cinemate/features/home/presentation/manager/get_highlight_movies_cubit/get_highlight_movies_cubit.dart';
 import 'package:cinemate/features/home/presentation/manager/get_movies_in_theaters_cubit/get_movies_in_theaters_cubit.dart';
+import 'package:cinemate/features/movie_details/data/data_sources/movie_details_remote_data_source.dart';
+import 'package:cinemate/features/movie_details/data/repositories/movie_details_repo_impl.dart';
+import 'package:cinemate/features/movie_details/domain/repositories/movie_details_repo.dart';
+import 'package:cinemate/features/movie_details/domain/use_cases/get_movie_details_use_case.dart';
+import 'package:cinemate/features/movie_details/presentation/manager/get_movie_details_cubit/get_movie_details_cubit.dart';
 import 'package:cinemate/features/root/presentation/manager/bottom_nav_cubit/bottom_nav_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -39,6 +44,9 @@ class ServicesLocator {
     sl.registerFactory<GetMoviesInTheatersCubit>(() => GetMoviesInTheatersCubit(sl.call()));
     sl.registerFactory<GetComingSoonMoviesCubit>(() => GetComingSoonMoviesCubit(sl.call()));
 
+    //Movie Details Cubits
+    sl.registerFactory<GetMovieDetailsCubit>(() => GetMovieDetailsCubit(sl.call()));
+
     //-------------------------------------------------------------------------------------------------//
     ///UseCase
     //Auth Use Cases
@@ -50,6 +58,8 @@ class ServicesLocator {
     sl.registerLazySingleton<GetMoviesInTheatersUseCase>(() => GetMoviesInTheatersUseCase(sl.call()));
     sl.registerLazySingleton<GetComingSoonMoviesUseCase>(() => GetComingSoonMoviesUseCase(sl.call()));
 
+    //Movie Details Use Cases
+    sl.registerLazySingleton<GetMovieDetailsUseCase>(() => GetMovieDetailsUseCase(sl.call()));
     //-------------------------------------------------------------------------------------------------//
     ///Repository
     //Auth Repository
@@ -57,6 +67,9 @@ class ServicesLocator {
 
     //Home Repository
     sl.registerLazySingleton<HomeRepo>(() => HomeRepoImpl(sl.call()));
+
+    //Movie Details Repository
+    sl.registerLazySingleton<MovieDetailsRepo>(() => MovieDetailsRepoImpl(sl.call()));
     //-------------------------------------------------------------------------------------------------//
     ///DataSource
     ///Remote Data Sources
@@ -67,6 +80,10 @@ class ServicesLocator {
     //Home DataSource
     sl.registerLazySingleton<HomeRemoteDataSource>(
         () => HomeRemoteDataSourceImpl(sl.call()));
+
+    //Movie Details DataSource
+    sl.registerLazySingleton<MovieDetailsRemoteDataSource>(
+        () => MovieDetailsRemoteDataSourceImpl(sl.call()));
 
     //-------------------------------------------------------------------------------------------------//
     ///Shared Preferences
@@ -84,7 +101,7 @@ class ServicesLocator {
     /// Register FirebaseAuth
     sl.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
     //-------------------------------------------------------------------------------------------------//
-    /// Register Firebase Firestore
+    /// Register Firebase FireStore
     sl.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
   }
 }

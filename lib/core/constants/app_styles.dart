@@ -42,14 +42,32 @@ class AppStyles {
     color: AppColors.white
   );
 
+  static TextStyle semiBold16 = const TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: AppColors.white
+  );
+
   static TextStyle medium20 = const TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w500,
       color: AppColors.white
   );
 
+  static TextStyle medium10 = const TextStyle(
+    fontSize: 10,
+    fontWeight: FontWeight.w500,
+      color: AppColors.white
+  );
+
   static TextStyle regular20  = const TextStyle(
     fontSize: 20,
+    fontWeight: FontWeight.w400,
+      color: AppColors.white
+  );
+
+  static TextStyle regular16  = const TextStyle(
+    fontSize: 16,
     fontWeight: FontWeight.w400,
       color: AppColors.white
   );
