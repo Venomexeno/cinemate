@@ -8,6 +8,8 @@ import 'package:cinemate/features/movie_details/presentation/manager/get_movie_d
 import 'package:cinemate/features/movie_details/presentation/pages/movie_details_page.dart';
 import 'package:cinemate/features/root/presentation/manager/bottom_nav_cubit/bottom_nav_cubit.dart';
 import 'package:cinemate/features/root/presentation/pages/root_page.dart';
+import 'package:cinemate/features/ticket_purchase/presentation/manager/get_available_seats_cubit/get_available_seats_cubit.dart';
+import 'package:cinemate/features/ticket_purchase/presentation/manager/get_movie_sessions_cubit/get_movie_sessions_cubit.dart';
 import 'package:cinemate/features/ticket_purchase/presentation/manager/ticket_data_cubit/ticket_data_cubit.dart';
 import 'package:cinemate/features/ticket_purchase/presentation/pages/ticket_purchase_page.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +68,15 @@ class OnGenerateRoute {
               providers: [
                 BlocProvider<TicketDataCubit>(
                   create: (context) => sl<TicketDataCubit>(),
+                ),
+                BlocProvider<GetMovieSessionsCubit>(
+                  create: (context) => sl<GetMovieSessionsCubit>(),
+                ),
+                BlocProvider<TicketDataCubit>(
+                  create: (context) => sl<TicketDataCubit>(),
+                ),
+                BlocProvider<GetAvailableSeatsCubit>(
+                  create: (context) => sl<GetAvailableSeatsCubit>(),
                 ),
               ],
               child: TicketPurchasePage(

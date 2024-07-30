@@ -10,7 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class MovieSessionsDialogBlocBuilder extends StatelessWidget {
   const MovieSessionsDialogBlocBuilder({
     super.key,
-    required this.mainContext, required this.sessionNotifier,
+    required this.mainContext,
+    required this.sessionNotifier,
   });
 
   final BuildContext mainContext;
@@ -51,8 +52,8 @@ class MovieSessionsDialogBlocBuilder extends StatelessWidget {
                           sessionNotifier.value =
                               formatTimestamp(movieSessions[index].date);
                           mainContext.read<TicketDataCubit>().selectSession(
-                            session: formatTimestamp(movieSessions[index].date),
-                          );
+                                movieSession: movieSessions[index],
+                              );
                           Navigator.pop(context);
                         },
                         child: Text(

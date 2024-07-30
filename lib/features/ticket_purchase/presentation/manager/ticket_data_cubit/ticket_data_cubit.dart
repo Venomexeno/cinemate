@@ -1,4 +1,5 @@
 import 'package:cinemate/features/ticket_purchase/domain/entities/buffet_product_entity.dart';
+import 'package:cinemate/features/ticket_purchase/domain/entities/movie_session_entity.dart';
 import 'package:cinemate/features/ticket_purchase/presentation/manager/ticket_data_cubit/ticket_data_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -6,10 +7,10 @@ class TicketDataCubit extends Cubit<TicketDataState> {
   TicketDataCubit() : super(const TicketDataState());
 
   void selectSession({
-    required String session,
+    required MovieSessionEntity movieSession,
 }) {
     emit(TicketDataState(
-      session: session,
+      movieSession: movieSession,
       buffetProducts: state.buffetProducts,
       seats: state.seats,
     ));
@@ -17,7 +18,7 @@ class TicketDataCubit extends Cubit<TicketDataState> {
 
   void selectBuffetProducts({required List<BuffetProductEntity> buffetProducts}) {
     emit(TicketDataState(
-      session: state.session,
+      movieSession: state.movieSession,
       buffetProducts: buffetProducts,
       seats: state.seats,
     ));
@@ -25,7 +26,7 @@ class TicketDataCubit extends Cubit<TicketDataState> {
 
   void selectSeats(List<String> seats) {
     emit(TicketDataState(
-      session: state.session,
+      movieSession: state.movieSession,
       buffetProducts: state.buffetProducts,
       seats: seats,
     ));

@@ -64,6 +64,7 @@ class _TicketPurchasePageBodyState extends State<TicketPurchasePageBody> {
           valueListenable: _currentPageNotifier,
           builder: (context, value, child) {
             return PageViewNextButton(
+              movieId: widget.movieId,
               currentPage: _currentPageNotifier.value,
               pageController: _pageController,
             );

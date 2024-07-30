@@ -22,8 +22,10 @@ import 'package:cinemate/features/root/presentation/manager/bottom_nav_cubit/bot
 import 'package:cinemate/features/ticket_purchase/data/data_sources/ticket_purchase_remote_data_source.dart';
 import 'package:cinemate/features/ticket_purchase/data/repositories/ticket_purchase_repo_impl.dart';
 import 'package:cinemate/features/ticket_purchase/domain/repositories/ticket_purchase_repo.dart';
+import 'package:cinemate/features/ticket_purchase/domain/use_cases/get_available_seats_use_case.dart';
 import 'package:cinemate/features/ticket_purchase/domain/use_cases/get_movie_sessions_use_case.dart';
 import 'package:cinemate/features/ticket_purchase/presentation/manager/buffet_product_cubit/buffet_product_cubit.dart';
+import 'package:cinemate/features/ticket_purchase/presentation/manager/get_available_seats_cubit/get_available_seats_cubit.dart';
 import 'package:cinemate/features/ticket_purchase/presentation/manager/get_movie_sessions_cubit/get_movie_sessions_cubit.dart';
 import 'package:cinemate/features/ticket_purchase/presentation/manager/ticket_data_cubit/ticket_data_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -58,6 +60,8 @@ class ServicesLocator {
     sl.registerFactory<GetMovieSessionsCubit>(() => GetMovieSessionsCubit(sl.call()));
     sl.registerFactory<TicketDataCubit>(() => TicketDataCubit());
     sl.registerFactory<BuffetProductCubit>(() => BuffetProductCubit());
+    sl.registerFactory<GetAvailableSeatsCubit>(() => GetAvailableSeatsCubit(sl.call()));
+
 
     //-------------------------------------------------------------------------------------------------//
     ///UseCase
@@ -75,6 +79,8 @@ class ServicesLocator {
 
     //Ticket Purchase Use Cases
     sl.registerLazySingleton<GetMovieSessionsUseCase>(() => GetMovieSessionsUseCase(sl.call()));
+    sl.registerLazySingleton<GetAvailableSeatsUseCase>(() => GetAvailableSeatsUseCase(sl.call()));
+
     //-------------------------------------------------------------------------------------------------//
     ///Repository
     //Auth Repository
