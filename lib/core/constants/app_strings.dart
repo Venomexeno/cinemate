@@ -1,6 +1,10 @@
 class AppStrings {
   AppStrings._();
 
+
+  ///Global
+  static  String textWithStar(String text) => '$text *';
+
   ///Home Page
   static const String signIn = 'Sign In';
   static const String signUp = 'Sign Up';
@@ -29,8 +33,16 @@ class AppStrings {
   static const String buyTicketNow = 'Buy Ticket Now';
 
   /// Ticket Purchase Page
+  // Select Session Page
   static const String checkoutMandatoryFieldsMessage =
       'You need to select the mandatory fields (*) to proceed to the checkout page.';
-  static const String selectSession = 'Select Session *';
+  static const String selectSession = 'Select Session';
   static const String buffetProducts = 'Buffet Products';
+  static const String next = 'Next';
+  static const String paymentOptions = 'Payment Options';
+  static const String price = 'Price';
+  static const String addToCart = 'Add to Cart';
+
+  // Select Seat Page
+  static const String screen = 'Screen';
 }

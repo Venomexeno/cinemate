@@ -36,8 +36,27 @@ class AppStyles {
 
   );
 
+  static TextStyle light14 = const TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w300,
+      color: AppColors.white
+
+  );
+
   static TextStyle semiBold15 = const TextStyle(
     fontSize: 15,
+    fontWeight: FontWeight.w600,
+    color: AppColors.white
+  );
+
+  static TextStyle semiBold14 = const TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w600,
+      color: AppColors.white
+  );
+
+  static TextStyle semiBold25 = const TextStyle(
+    fontSize: 25,
     fontWeight: FontWeight.w600,
     color: AppColors.white
   );
@@ -50,6 +69,12 @@ class AppStyles {
 
   static TextStyle medium20 = const TextStyle(
     fontSize: 20,
+    fontWeight: FontWeight.w500,
+      color: AppColors.white
+  );
+
+  static TextStyle medium16 = const TextStyle(
+    fontSize: 16,
     fontWeight: FontWeight.w500,
       color: AppColors.white
   );

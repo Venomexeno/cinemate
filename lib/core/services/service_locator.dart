@@ -19,6 +19,13 @@ import 'package:cinemate/features/movie_details/domain/repositories/movie_detail
 import 'package:cinemate/features/movie_details/domain/use_cases/get_movie_details_use_case.dart';
 import 'package:cinemate/features/movie_details/presentation/manager/get_movie_details_cubit/get_movie_details_cubit.dart';
 import 'package:cinemate/features/root/presentation/manager/bottom_nav_cubit/bottom_nav_cubit.dart';
+import 'package:cinemate/features/ticket_purchase/data/data_sources/ticket_purchase_remote_data_source.dart';
+import 'package:cinemate/features/ticket_purchase/data/repositories/ticket_purchase_repo_impl.dart';
+import 'package:cinemate/features/ticket_purchase/domain/repositories/ticket_purchase_repo.dart';
+import 'package:cinemate/features/ticket_purchase/domain/use_cases/get_movie_sessions_use_case.dart';
+import 'package:cinemate/features/ticket_purchase/presentation/manager/buffet_product_cubit/buffet_product_cubit.dart';
+import 'package:cinemate/features/ticket_purchase/presentation/manager/get_movie_sessions_cubit/get_movie_sessions_cubit.dart';
+import 'package:cinemate/features/ticket_purchase/presentation/manager/ticket_data_cubit/ticket_data_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -47,6 +54,11 @@ class ServicesLocator {
     //Movie Details Cubits
     sl.registerFactory<GetMovieDetailsCubit>(() => GetMovieDetailsCubit(sl.call()));
 
+    //Ticket Purchase Cubits
+    sl.registerFactory<GetMovieSessionsCubit>(() => GetMovieSessionsCubit(sl.call()));
+    sl.registerFactory<TicketDataCubit>(() => TicketDataCubit());
+    sl.registerFactory<BuffetProductCubit>(() => BuffetProductCubit());
+
     //-------------------------------------------------------------------------------------------------//
     ///UseCase
     //Auth Use Cases
@@ -60,6 +72,9 @@ class ServicesLocator {
 
     //Movie Details Use Cases
     sl.registerLazySingleton<GetMovieDetailsUseCase>(() => GetMovieDetailsUseCase(sl.call()));
+
+    //Ticket Purchase Use Cases
+    sl.registerLazySingleton<GetMovieSessionsUseCase>(() => GetMovieSessionsUseCase(sl.call()));
     //-------------------------------------------------------------------------------------------------//
     ///Repository
     //Auth Repository
@@ -70,6 +85,9 @@ class ServicesLocator {
 
     //Movie Details Repository
     sl.registerLazySingleton<MovieDetailsRepo>(() => MovieDetailsRepoImpl(sl.call()));
+
+    //Ticket Purchase Repository
+    sl.registerLazySingleton<TicketPurchaseRepo>(() => TicketPurchaseRepoImpl(sl.call()));
     //-------------------------------------------------------------------------------------------------//
     ///DataSource
     ///Remote Data Sources
@@ -84,6 +102,10 @@ class ServicesLocator {
     //Movie Details DataSource
     sl.registerLazySingleton<MovieDetailsRemoteDataSource>(
         () => MovieDetailsRemoteDataSourceImpl(sl.call()));
+
+    //Ticket Purchase DataSource
+    sl.registerLazySingleton<TicketPurchaseRemoteDataSource>(
+        () => TicketPurchaseRemoteDataSourceImpl(sl.call()));
 
     //-------------------------------------------------------------------------------------------------//
     ///Shared Preferences

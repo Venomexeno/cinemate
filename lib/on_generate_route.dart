@@ -8,6 +8,7 @@ import 'package:cinemate/features/movie_details/presentation/manager/get_movie_d
 import 'package:cinemate/features/movie_details/presentation/pages/movie_details_page.dart';
 import 'package:cinemate/features/root/presentation/manager/bottom_nav_cubit/bottom_nav_cubit.dart';
 import 'package:cinemate/features/root/presentation/pages/root_page.dart';
+import 'package:cinemate/features/ticket_purchase/presentation/manager/ticket_data_cubit/ticket_data_cubit.dart';
 import 'package:cinemate/features/ticket_purchase/presentation/pages/ticket_purchase_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,8 +62,14 @@ class OnGenerateRoute {
       case AppRoutes.ticketPurchasePageRoute:
         return MaterialPageRoute(
           builder: (_) {
-            return TicketPurchasePage(
-              movieData: settings.arguments as Map<String, dynamic>
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider<TicketDataCubit>(
+                  create: (context) => sl<TicketDataCubit>(),
+                ),
+              ],
+              child: TicketPurchasePage(
+                  movieData: settings.arguments as Map<String, dynamic>),
             );
           },
           settings: settings,

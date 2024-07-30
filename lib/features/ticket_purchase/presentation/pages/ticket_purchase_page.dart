@@ -1,5 +1,5 @@
 import 'package:cinemate/core/widgets/custom_scaffold_with_background.dart';
-import 'package:cinemate/features/ticket_purchase/presentation/widgets/ticket_purchase_page_body.dart';
+import 'package:cinemate/features/ticket_purchase/presentation/widgets/ticket_purchase_widgets/ticket_purchase_page_body.dart';
 import 'package:flutter/material.dart';
 
 class TicketPurchasePage extends StatelessWidget {
@@ -14,6 +14,7 @@ class TicketPurchasePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return  CustomScaffoldWithBackground(
       body: TicketPurchasePageBody(
+        movieId: movieData['movieId'],
         movieName: movieData['movieTitle'],
         movieCoverUrl: movieData['movieCover'],
         movieCompany: movieData['movieCompany'],

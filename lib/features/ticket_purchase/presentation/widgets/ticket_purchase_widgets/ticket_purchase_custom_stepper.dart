@@ -25,7 +25,7 @@ class TicketPurchaseCustomStepper extends StatelessWidget {
                   width: 28.0,
                   height: 28.0,
                   decoration: BoxDecoration(
-                    color:  currentPageNotifier.value >= index
+                    color: currentPageNotifier.value >= index
                         ? AppColors.darkPurple
                         : AppColors.transparent,
                     shape: BoxShape.circle,
@@ -36,13 +36,19 @@ class TicketPurchaseCustomStepper extends StatelessWidget {
                     ),
                   ),
                   child: Center(
-                    child: Text(
-                      '${index + 1}',
-                      style: AppStyles.medium10.copyWith(
-                        color: currentPageNotifier.value >= index
-                            ? AppColors.white
-                            : AppColors.darkPurple,
-                      ),
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 300),
+                      child: currentPageNotifier.value > index
+                          ? const Icon(Icons.check_rounded,
+                              color: AppColors.white, size: 10)
+                          : Text(
+                              '${index + 1}',
+                              style: AppStyles.medium10.copyWith(
+                                color: currentPageNotifier.value >= index
+                                    ? AppColors.white
+                                    : AppColors.darkPurple,
+                              ),
+                            ),
                     ),
                   ),
                 ),
