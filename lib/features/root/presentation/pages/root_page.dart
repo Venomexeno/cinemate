@@ -5,6 +5,7 @@ import 'package:cinemate/features/home/presentation/manager/get_movies_in_theate
 import 'package:cinemate/features/home/presentation/pages/home_page.dart';
 import 'package:cinemate/features/root/presentation/manager/bottom_nav_cubit/bottom_nav_cubit.dart';
 import 'package:cinemate/features/root/presentation/widgets/bottom_nav_bar.dart';
+import 'package:cinemate/features/tickets/presentation/manager/get_tickets_cubit/get_tickets_cubit.dart';
 import 'package:cinemate/features/tickets/presentation/pages/tickets_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,15 +31,22 @@ class RootPage extends StatelessWidget {
                         ..getHighlightedMovies(),
                     ),
                     BlocProvider<GetMoviesInTheatersCubit>(
-                      create: (context) => sl<GetMoviesInTheatersCubit>()..getMoviesInTheaters(),
+                      create: (context) =>
+                      sl<GetMoviesInTheatersCubit>()
+                        ..getMoviesInTheaters(),
                     ),
                     BlocProvider<GetComingSoonMoviesCubit>(
-                      create: (context) => sl<GetComingSoonMoviesCubit>()..getComingSoonMovies(),
+                      create: (context) =>
+                      sl<GetComingSoonMoviesCubit>()
+                        ..getComingSoonMovies(),
                     ),
                   ],
                   child: const HomePage(),
                 ),
-                const TicketsPage(),
+                BlocProvider<GetTicketsCubit>(
+                  create: (context) => sl<GetTicketsCubit>()..getTickets(),
+                  child: const TicketsPage(),
+                ),
               ],
             ),
             const BottomNavBar(),

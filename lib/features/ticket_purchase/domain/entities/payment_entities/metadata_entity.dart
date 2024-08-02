@@ -1,0 +1,3 @@
+class MetadataEntity {
+  const MetadataEntity();
+}

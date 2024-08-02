@@ -5,15 +5,17 @@ import 'package:equatable/equatable.dart';
 class TicketDataState extends Equatable {
   final MovieSessionEntity? movieSession;
   final List<BuffetProductEntity>? buffetProducts;
-  final List<String>? seats;
+  final int? seatsCount;
+  final String? paymentMethod;
 
   const TicketDataState({
     this.movieSession,
     this.buffetProducts,
-    this.seats,
+    this.seatsCount,
+    this.paymentMethod,
   });
 
   @override
-  List<Object?> get props => [movieSession, buffetProducts, seats];
+  List<Object?> get props => [movieSession, buffetProducts, seatsCount, paymentMethod];
 }
 

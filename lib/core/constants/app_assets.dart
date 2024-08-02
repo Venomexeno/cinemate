@@ -4,6 +4,7 @@ class AppAssets {
 
   static const String appIcons = 'assets/fonts/app_icons.ttf';
   static const String background = 'assets/images/background.png';
+  static const String card = 'assets/images/card.png';
   static const String movie1 = 'assets/images/movies_list/movie_1.jpg';
   static const String movie10 = 'assets/images/movies_list/movie_10.jpg';
   static const String movie11 = 'assets/images/movies_list/movie_11.jpg';
@@ -24,6 +25,7 @@ class AppAssets {
   static const String movie7 = 'assets/images/movies_list/movie_7.jpg';
   static const String movie8 = 'assets/images/movies_list/movie_8.jpg';
   static const String movie9 = 'assets/images/movies_list/movie_9.jpg';
+  static const String paypal = 'assets/images/paypal.png';
   static const String popcornCocacola = 'assets/images/popcorn_cocacola.png';
   static const String screen = 'assets/images/screen.png';
 

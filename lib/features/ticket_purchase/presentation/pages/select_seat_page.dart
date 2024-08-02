@@ -1,13 +1,17 @@
 import 'package:cinemate/core/constants/app_assets.dart';
 import 'package:cinemate/core/constants/app_strings.dart';
 import 'package:cinemate/core/constants/app_styles.dart';
+import 'package:cinemate/features/movie_details/presentation/widgets/movie_details_section_header.dart';
 import 'package:cinemate/features/ticket_purchase/presentation/manager/get_available_seats_cubit/get_available_seats_cubit.dart';
 import 'package:cinemate/features/ticket_purchase/presentation/widgets/select_seat_widgets/seats_gird_view.dart';
+import 'package:cinemate/features/ticket_purchase/presentation/widgets/select_seat_widgets/ticket_details_bloc_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SelectSeatPage extends StatelessWidget {
-  const SelectSeatPage({super.key});
+  const SelectSeatPage({super.key, required this.movieName});
+
+  final String movieName;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +34,21 @@ class SelectSeatPage extends StatelessWidget {
                   ],
                 ),
               ),
-              SeatsGirdView(seats: seats)
+              SeatsGirdView(seats: seats),
+              SliverToBoxAdapter(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 30),
+                    const MovieDetailsSectionHeader(
+                        sectionTitle: AppStrings.ticketDetails),
+                    const SizedBox(height: 9),
+                    TicketDetailsBlocBuilder(
+                      movieName: movieName,
+                    ),
+                  ],
+                ),
+              )
             ],
           );
         } else if (state is GetAvailableSeatsFailure) {

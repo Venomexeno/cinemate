@@ -1,17 +1,18 @@
+import 'package:cinemate/core/constants/api_keys.dart';
 import 'package:cinemate/core/constants/app_colors.dart';
 import 'package:cinemate/core/constants/app_strings.dart';
 import 'package:cinemate/core/services/service_locator.dart';
 import 'package:cinemate/core/utils/determine_initial_route.dart';
 import 'package:cinemate/on_generate_route.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  Stripe.publishableKey = ApiKeys.publishableKey;
   await ServicesLocator().init();
   final pageRoute = await determineInitialRoute();
   runApp(MyApp(pageRoute: pageRoute));

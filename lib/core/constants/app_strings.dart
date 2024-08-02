@@ -45,4 +45,9 @@ class AppStrings {
 
   // Select Seat Page
   static const String screen = 'Screen';
+  static const String ticketDetails = 'Ticket Details';
+  static const String totalAmount = 'Total Amount';
+
+  // Payment Method Page
+  static const String selectPaymentOptions = 'Select Payment Options';
 }

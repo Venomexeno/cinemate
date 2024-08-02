@@ -1,9 +1,31 @@
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Failure {
   final String message;
 
   Failure(this.message);
+}
+
+class ServerFailure extends Failure {
+  ServerFailure(super.message);
+
+  factory ServerFailure.fromStatusCode(DioException e) {
+    switch (e.response!.statusCode) {
+      case 400:
+        return ServerFailure('Bad Request');
+      case 401:
+        return ServerFailure('Unauthorized');
+      case 403:
+        return ServerFailure('Forbidden');
+      case 404:
+        return ServerFailure('Not Found');
+      case 500:
+        return ServerFailure('Internal Server Error');
+      default:
+        return ServerFailure('Unknown error occurred');
+    }
+  }
 }
 
 class FirebaseFailure extends Failure {

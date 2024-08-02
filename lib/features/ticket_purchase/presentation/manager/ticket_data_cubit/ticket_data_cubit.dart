@@ -8,27 +8,41 @@ class TicketDataCubit extends Cubit<TicketDataState> {
 
   void selectSession({
     required MovieSessionEntity movieSession,
-}) {
+  }) {
     emit(TicketDataState(
       movieSession: movieSession,
       buffetProducts: state.buffetProducts,
-      seats: state.seats,
+      seatsCount: state.seatsCount,
+      paymentMethod: state.paymentMethod,
     ));
   }
 
-  void selectBuffetProducts({required List<BuffetProductEntity> buffetProducts}) {
+  void selectBuffetProducts(
+      {required List<BuffetProductEntity> buffetProducts}) {
     emit(TicketDataState(
       movieSession: state.movieSession,
       buffetProducts: buffetProducts,
-      seats: state.seats,
+      seatsCount: state.seatsCount,
+      paymentMethod: state.paymentMethod,
+
     ));
   }
 
-  void selectSeats(List<String> seats) {
+  void selectSeats(int seatsCount) {
     emit(TicketDataState(
       movieSession: state.movieSession,
       buffetProducts: state.buffetProducts,
-      seats: seats,
+      seatsCount: seatsCount,
+      paymentMethod: state.paymentMethod,
     ));
   }
+  void selectPaymentMethod(String? paymentMethod) {
+    emit(TicketDataState(
+      movieSession: state.movieSession,
+      buffetProducts: state.buffetProducts,
+      seatsCount: state.seatsCount,
+      paymentMethod: paymentMethod,
+    ));
+  }
+
 }

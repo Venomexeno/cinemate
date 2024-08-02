@@ -12,8 +12,7 @@ class AuthRepoImpl implements AuthRepo {
   AuthRepoImpl(this._authRemoteDataSource);
 
   @override
-  Future<Either<Failure, User>> signIn(
-      SignInParameters parameters) async {
+  Future<Either<Failure, User>> signIn(SignInParameters parameters) async {
     try {
       final user = await _authRemoteDataSource.signIn(parameters);
       return Right(user);

@@ -8,8 +8,12 @@ import 'package:cinemate/features/movie_details/presentation/manager/get_movie_d
 import 'package:cinemate/features/movie_details/presentation/pages/movie_details_page.dart';
 import 'package:cinemate/features/root/presentation/manager/bottom_nav_cubit/bottom_nav_cubit.dart';
 import 'package:cinemate/features/root/presentation/pages/root_page.dart';
+import 'package:cinemate/features/ticket_purchase/presentation/manager/generate_ticket_cubit/generate_ticket_cubit.dart';
 import 'package:cinemate/features/ticket_purchase/presentation/manager/get_available_seats_cubit/get_available_seats_cubit.dart';
 import 'package:cinemate/features/ticket_purchase/presentation/manager/get_movie_sessions_cubit/get_movie_sessions_cubit.dart';
+import 'package:cinemate/features/ticket_purchase/presentation/manager/payment_cubit/payment_cubit.dart';
+import 'package:cinemate/features/ticket_purchase/presentation/manager/payment_method_cubit/payment_method_cubit.dart';
+import 'package:cinemate/features/ticket_purchase/presentation/manager/seat_selection_cubit/seat_selection_cubit.dart';
 import 'package:cinemate/features/ticket_purchase/presentation/manager/ticket_data_cubit/ticket_data_cubit.dart';
 import 'package:cinemate/features/ticket_purchase/presentation/pages/ticket_purchase_page.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +70,9 @@ class OnGenerateRoute {
           builder: (_) {
             return MultiBlocProvider(
               providers: [
+                BlocProvider<SeatSelectionCubit>(
+                  create: (context) => sl<SeatSelectionCubit>(),
+                ),
                 BlocProvider<TicketDataCubit>(
                   create: (context) => sl<TicketDataCubit>(),
                 ),
@@ -77,6 +84,15 @@ class OnGenerateRoute {
                 ),
                 BlocProvider<GetAvailableSeatsCubit>(
                   create: (context) => sl<GetAvailableSeatsCubit>(),
+                ),
+                BlocProvider<PaymentMethodCubit>(
+                  create: (context) => sl<PaymentMethodCubit>(),
+                ),
+                BlocProvider<PaymentCubit>(
+                  create: (context) => sl<PaymentCubit>(),
+                ),
+                BlocProvider<GenerateTicketCubit>(
+                  create: (context) => sl<GenerateTicketCubit>(),
                 ),
               ],
               child: TicketPurchasePage(
